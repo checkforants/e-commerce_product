@@ -102,24 +102,9 @@ input,textarea, select, option{
 input::-webkit-input-placeholder{
 	color: rgba(0, 0, 0, 0.625);
 }
-textarea{
-	box-shadow: 2px 2px 3px 1px rgba(0, 0, 0, 0.2);
-}
 textarea::-webkit-input-placeholder{
 	color: rgba(0, 0, 0, 0.625);
 
-}
-
-
-
-.send_pictures{
-	background-color: #d1d5db;
-	position: relative;
-	flex: 0 1 40%;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	border-radius: 10px;
 }
 
 @media (max-width:800px) {
@@ -127,7 +112,6 @@ textarea::-webkit-input-placeholder{
 		width: 100%;
 		margin: 0;
 		padding: 0px;
-
 	}
 	.navigator{
 		width: 100%;
@@ -137,8 +121,4 @@ textarea::-webkit-input-placeholder{
 		display: none;
 	}
 }
-.sneakers{
-	font-family: 'Cambay', sans-serif;
-	letter-spacing: 0px;
-	font-size: 28px;
-}
+.sneakers

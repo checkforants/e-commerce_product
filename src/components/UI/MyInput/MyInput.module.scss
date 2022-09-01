@@ -1,0 +1,44 @@
+$darkGrayishBlue: hsl(234, 11%, 52%);
+.myinput{
+	position: relative;
+	width: 100%;
+	height: 44px;
+	margin: 3px 1px;
+
+	align-items: center;
+	margin-bottom: 5px;
+	// justify-content: center;
+	// display: none;
+}
+
+label{
+	font-size: 15px;
+	position: absolute;
+	left: 10px;
+	top: 17px;
+	color: $darkGrayishBlue;
+	
+}
+input{
+	
+	border-radius: 5px;
+	padding: 18px 7px 5px 10px;
+	width: 100%;
+	height: 44px;
+	outline:none;
+	border: 2px solid rgba(128, 128, 128, 0.466);
+}
+.clicked{
+	input{
+		display: block;
+		// outline: solid 1px #96c2f7;
+		// background-color:#b3d4fc;
+	}
+	label{
+		left: 10px;
+		top: 5px;
+		font-size: 12px;
+		color: hsl(235, 99%, 68%);
+	}
+}
+
