@@ -15,7 +15,7 @@ interface IData{
 	}
 }
 const Item = ({info}:IData) => {
-	console.log(info);
+	// console.log(info);
 	
 	return (
 			<Link to={`/item/${info.pid}`} className='flex flex-row justify-between border-b-2 py-2 basis-1/3 shrink-0'>

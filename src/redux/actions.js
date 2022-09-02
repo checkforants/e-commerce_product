@@ -3,6 +3,9 @@ import { IProduct } from './../models';
 import { query, collection } from 'firebase/firestore';
 import { db } from './firebase';
 import { getDocs } from 'firebase/firestore';
+
+
+
 export function addItem(payload) {
 	return {
 		type:ADD_ITEM,

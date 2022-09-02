@@ -6,7 +6,7 @@ import { connect, useDispatch } from 'react-redux';
 import {storage} from '../redux/firebase'
 import { ref, getDownloadURL } from 'firebase/storage';
 
-import UserSettings from './UserSettings';
+import UserModal from './UserModal';
 
 
 const Navigator = (props:any) => {
@@ -28,8 +28,8 @@ const Navigator = (props:any) => {
 				</Link>
 				<div className='titles flex flex-row space-x-8'>
 					<Link className='menu_item pb-8 box-border' to="/">Collections</Link>
-					<Link className='menu_item pb-8 box-border' to="/">Men</Link>
-					<Link className='menu_item pb-8 box-border' to="/">Women</Link>
+					<Link className='menu_item pb-8 box-border' to="/men">Men</Link>
+					<Link className='menu_item pb-8 box-border' to="/women">Women</Link>
 					<Link className='menu_item pb-8 box-border' to="/about">About</Link>
 					{props.user.email?<Link className='menu_item pb-8 box-border' to="/newItem">CreateItem</Link>:''}
 				</div>
@@ -47,7 +47,7 @@ const Navigator = (props:any) => {
 				
 				?<div className='relative pl-4' onMouseEnter={()=>setUserModal(true)} onMouseLeave={()=>setUserModal(false)}>
 					<img  id={'myimg'} className='w-[45px] h-[45px] relative bottom-[14px] avatar' src={props.image} alt="ava" />
-					{userModal?<UserSettings/>:''}
+					{userModal?<UserModal/>:''}
 				</div>
 				:<Link className='pl-5' to='/login'>
 					<img  className='w-[25px] h-[25px] relative bottom-[4px] ' src='https://firebasestorage.googleapis.com/v0/b/sneakers-36077.appspot.com/o/signIn.png?alt=media&token=0119d870-fe68-43d4-aa60-70d0b900df81' alt="sign in">

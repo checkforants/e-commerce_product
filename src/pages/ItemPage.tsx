@@ -61,7 +61,7 @@ const ItemPage = (props:any) => {
 			<div className='flex justify-between items-center'>
 				<div className="flex flex-col space-y-8 basis-[36%] ">
 					{/* <div className=''> */}
-						<img className="rounded-lg object-contain top-0" src={arr[modal?0:currentImg]} alt="img"/>
+						<img className="rounded-lg object-contain top-0 max-h-[60vh]" src={arr[modal?0:currentImg]} alt="img"/>
 					{/* </div> */}
 					<Thumbnail setModal={setModal} currentImg={currentImg} chooseImg={setCurrentImg} photosArr={arr}></Thumbnail>
 				</div>

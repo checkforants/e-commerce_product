@@ -8,42 +8,29 @@ import { db } from '../redux/firebase';
 import { query } from 'firebase/firestore';
 import { collection } from 'firebase/firestore';
 import { addItem } from './../redux/actions';
+import { useLocation, useParams } from 'react-router-dom';
+import { useMatch } from 'react-router-dom';
+import { IProduct } from './../models';
 
 
 const CollectionsPage = (props:any) => {
-	const [data, setData] = useState<any[]>([])
-	console.log(props.items);
 	
-	const dispatch = useDispatch()
-	const itemsState = props.items
-	console.log(data);
+	let location = useLocation();
+
+	let res = props.items
+
 	
-	const getItems =async ()=>{
-		const q = query(collection(db, 'items'))
-		const querySnapshot = await getDocs(q);
-		console.log(typeof querySnapshot);
-		querySnapshot.forEach((doc) => {
-			// doc.data() is never undefined for query doc snapshots
-			console.log(doc.data());
-			dispatch(addItem(doc.data()))
-			setData(prev=>{
-				return([...prev, doc.data()])
-			})
-		  });
+	if (location.pathname=='/men'){
+		res = res.filter((item:any)=>item.sex!=='women')
 
 	}
-	useEffect(()=>{
-		getItems()
-	},[])
-	// console.log(itemsState);
+	if (location.pathname=='/women'){
+		res = res.filter((item:any)=>item.sex!=='men')
 
-	
-	
-	
-
+	}
 	return (
 		<div className='h-full pt-[65px] flex flex-col'>
-			{data?data.map((item:any, ind:number)=><Item key={ind} info={item}></Item>):'nea'}
+			{res?res.map((item:any, ind:number)=><Item key={ind} info={item}></Item>):'MT'}
 		</div>
 	);
 };
