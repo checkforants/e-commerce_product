@@ -1,0 +1,104 @@
+.container {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  padding-top: 80px;
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.login {
+  max-width: 500px;
+  min-width: 330px;
+  height: auto;
+  padding: 20px 20px 10px 20px;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-shadow: 0px 0px 30px 12px rgba(13, 18, 48, 0.259);
+          box-shadow: 0px 0px 30px 12px rgba(13, 18, 48, 0.259);
+  background-color: #fff;
+  border-radius: 10px;
+}
+
+.title {
+  margin: 0 auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  font-size: 1.25rem;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-bottom: 10px;
+  font-weight: 400;
+  letter-spacing: -1.3px;
+}
+
+.title img {
+  max-width: 30px;
+  margin-bottom: 1rem;
+}
+
+.next {
+  padding: 10px;
+  background-color: #128fdc;
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  outline: 0;
+  border-radius: 5px;
+  border: 0;
+  margin: 15px 0px 0px 0px;
+}
+
+.content {
+  max-height: 0;
+  padding: 0.5px;
+  overflow: hidden;
+  -webkit-transition: max-height 1s;
+  transition: max-height 1s;
+}
+
+.content.active {
+  max-height: 83px;
+}
+
+.contentInner {
+  opacity: 0;
+  visibility: hidden;
+  -webkit-transform: translateY(10px);
+          transform: translateY(10px);
+  -webkit-transition: opacity 1s, visibility 1s, -webkit-transform 1s;
+  transition: opacity 1s, visibility 1s, -webkit-transform 1s;
+  transition: opacity 1s, visibility 1s, transform 1s;
+  transition: opacity 1s, visibility 1s, transform 1s, -webkit-transform 1s;
+}
+
+.active .contentInner {
+  opacity: 1;
+  visibility: visible;
+  -webkit-transform: translateY(0);
+          transform: translateY(0);
+}

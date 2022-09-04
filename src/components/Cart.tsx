@@ -7,7 +7,7 @@ interface ICartProps{
 }
 // 
 const Cart = (props:any) => {
-	console.log(props.cart);
+
 	
 	return (
 		<div className='w-[300px] top-10 h-[200px] bg-white absolute z-3 right-0 rounded-md  flex flex-col pt-5 shadow-[0_0px_60px_-5px_rgba(0,0,0,0.3)]

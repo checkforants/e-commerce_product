@@ -1,0 +1,38 @@
+.myinput {
+  position: relative;
+  width: 100%;
+  height: 44px;
+  margin: 3px 1px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-bottom: 5px;
+}
+
+label {
+  font-size: 15px;
+  position: absolute;
+  left: 10px;
+  top: 17px;
+  color: #777a92;
+}
+
+input {
+  border-radius: 5px;
+  padding: 18px 7px 5px 10px;
+  width: 100%;
+  height: 44px;
+  outline: none;
+  border: 2px solid rgba(128, 128, 128, 0.466);
+}
+
+.clicked input {
+  display: block;
+}
+
+.clicked label {
+  left: 10px;
+  top: 5px;
+  font-size: 12px;
+  color: #5d6afe;
+}

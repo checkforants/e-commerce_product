@@ -133,6 +133,7 @@ const CreateNewItem = (props) => {
 					console.log(res);
 					dispatch(addItem(res));
 					setLoader(false)
+					setDoc(docRef, res)
 				}
 			  });
 			}

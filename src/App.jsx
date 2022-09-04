@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Navigate, Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes, useNavigate } from 'react-router-dom';
 
 import Navigator from './components/Navigator';
 import Modal from './components/Modal';
@@ -13,7 +13,7 @@ import {useCollectionData} from 'react-firebase-hooks/firestore'
 import 'firebase/firestore';
 import { db, app } from './redux/firebase';
 import { getFirestore, collection } from 'firebase/firestore';
-import { init, addItem } from './redux/actions';
+import { init, addItem, setUser } from './redux/actions';
 import { useDispatch, connect } from 'react-redux';
 import Login from './pages/Login/Login';
 import Signup from './pages/Signup/Signup';
@@ -23,7 +23,7 @@ import { getAuth } from 'firebase/auth';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 
 
-
+import { useAuthState } from 'react-firebase-hooks/auth';
 
 function App(props) {
 	//  const [items, itemsLoading, itemsSnap, itemsError] = useCollectionData(
@@ -31,10 +31,12 @@ function App(props) {
 	// )
 	// console.log(items);
 	const dispatch = useDispatch()
+	const navigate = useNavigate()
+
+
 	const auth = getAuth() 
-	
-	console.log(auth);
-	const user = auth.currentUser
+	const [user, loading, error] = useAuthState(auth);
+
 
 	const getItems =async ()=>{
 		const q = query(collection(db, 'items'))
@@ -48,8 +50,21 @@ function App(props) {
 	}
 	useEffect(()=>{
 		getItems()
-		
-	},[props.currentUser])
+	},[])
+	
+	
+	
+	useEffect(() => {
+		console.log(auth.currentUser);
+		if (user){
+			dispatch(setUser({
+				email:user.email,
+				id:user.uid,
+				token:user.accessToken,
+			}))
+			navigate('/')
+		}
+	}, [user]);
 
   return (
 	<div className='app w-4/5 h-screen mx-auto box-border relative '>

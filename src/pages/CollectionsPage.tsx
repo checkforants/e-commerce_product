@@ -11,6 +11,7 @@ import { addItem } from './../redux/actions';
 import { useLocation, useParams } from 'react-router-dom';
 import { useMatch } from 'react-router-dom';
 import { IProduct } from './../models';
+import Loader from './../components/UI/loader/Loader';
 
 
 const CollectionsPage = (props:any) => {
@@ -30,7 +31,7 @@ const CollectionsPage = (props:any) => {
 	}
 	return (
 		<div className='h-full pt-[65px] flex flex-col'>
-			{res?res.map((item:any, ind:number)=><Item key={ind} info={item}></Item>):'MT'}
+			{res?res.map((item:any, ind:number)=><Item key={ind} info={item}></Item>):<Loader></Loader>}
 		</div>
 	);
 };

@@ -38,6 +38,10 @@ body{
 	border-bottom: orange solid  4px;
 	transition:  border 0.3s ease 0s;  
 }
+.active{
+	border-bottom: orange solid  4px;
+	transition:  border 0.3s ease 0s;  
+}
 .avatar:hover{
 	border-radius: 50%;
 	border: orange solid  3px ;
