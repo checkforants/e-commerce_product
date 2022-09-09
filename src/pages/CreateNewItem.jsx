@@ -155,47 +155,41 @@ const CreateNewItem = (props) => {
 
 
 	return (
-		<form className='flex flex-col justify-between items-end w-9/12 pt-[10%] pb-[1%] h-full'>
-			{/* {loader&& <Modal>{<Loader></Loader>}</Modal>} */}
-			<input type="text" placeholder='company' name='company'  onChange={(e)=>{onChange(e)}}/>
-			<input type="text" placeholder='collection' name='collection' onChange={(e)=>{onChange(e)}}/>
-			<input type="text" 	placeholder='name' name='name' onChange={(e)=>{onChange(e)}}/>
-			<div className='flex flex-row space-x-5 w-full'>
-				<input type="text" placeholder='price' name='price' onChange={(e)=>{onChange(e, true)}}/>
-				<input type="text" placeholder='discount' name='discount' onChange={(e)=>{onChange(e, true)}}/>
-				<select type="text" placeholder='sex'  name='sex' onChange={(e)=>{onChange(e)}}>
-					<option selected disabled>sex</option>
-					<option>male</option>
-					<option>female</option>
-					<option>uni</option>
-				</select>
-
-				<input type="text" placeholder='amount' name='amount' onChange={(e)=>{onChange(e, true)}}/>
-			</div>
-			<textarea placeholder='description' name='description' onChange={(e)=>{onChange(e)}}/>
-
-
-			<div className='mt-5 flex flex-row justify-between w-full h-[50px]'>
-				
-
-						<input name='photos' className='hidden ' type="file" multiple id="input_img"
-							onChange={(e)=>{setChosenPhotos(e.target)}}
-							accept="image/*">
-						</input>
-
-						<label htmlFor="input_img"className='px-12 flex justify-center items-center bg-gray-400 text-black
-								hover:shadow-xl hover:bg-gray-200 rounded-md relative box-border w-auto px-[30px]] left-0 top-0 space-x-2'>
-								<div>Загрузить фотографии</div>
-								<img src={require("../images/atta.png")} alt="Выбрать файл" width="25"></img>
-						</label>
-
-
-				{loader&&<Loader/>}
-
-				<button disabled={loader} onClick={(e)=>onSubmit(e)} className='items-center justify-center text-white rounded-md bg-orange-600 px-7 py-[2px]
-							hover:shadow-xl hover:bg-orange-300 hover:shadow-orange-100'>Создать страничку товара</button>
-			</div>
-		</form>
+		<div className='relative h-5/6 mt-[20px] flex flex-col items-center justify-center '>
+			<form className='flex flex-col justify-between h-full md:h-[400px] w-full'>
+				{/* {loader&& <Modal>{<Loader></Loader>}</Modal>} */}
+				<input type="text" placeholder='company' name='company'  onChange={(e)=>{onChange(e)}}/>
+				<input type="text" placeholder='collection' name='collection' onChange={(e)=>{onChange(e)}}/>
+				<input type="text" 	placeholder='name' name='name' onChange={(e)=>{onChange(e)}}/>
+				<div className='grid grid-rows-2 gap-2 grid-cols-2 md:flex md:flex-row md:space-x-5 w-full'>
+					<input type="text" placeholder='price' name='price' onChange={(e)=>{onChange(e, true)}}/>
+					<input type="text" placeholder='discount' name='discount' onChange={(e)=>{onChange(e, true)}}/>
+					<select type="text" placeholder='sex'  name='sex' onChange={(e)=>{onChange(e)}}>
+						<option selected disabled>sex</option>
+						<option>male</option>
+						<option>female</option>
+						<option>uni</option>
+					</select>
+					<input type="text" placeholder='amount' name='amount' onChange={(e)=>{onChange(e, true)}}/>
+				</div>
+				<textarea className='h-[70px] md:h-[70px] overflow-hidden'  placeholder='description' name='description' onChange={(e)=>{onChange(e)}}/>
+				<div className='mt-2 md:mt-5 flex flex-row justify-between w-full h-[60px]'>
+			
+							<input name='photos' className='hidden ' type="file" multiple id="input_img"
+								onChange={(e)=>{setChosenPhotos(e.target)}}
+								accept="image/*">
+							</input>
+							<label htmlFor="input_img" className='text-sm md:text-base px-[5px] md:px-12 flex justify-center items-center bg-gray-400 text-black
+									hover:shadow-xl hover:bg-gray-200 rounded-md relative box-border w-auto px-[30px]] left-0 top-0 space-x-2'>
+									<div>Загрузить фотографии</div>
+									<img src={require("../images/atta.png")} alt="Выбрать файл" width="25"></img>
+							</label>
+					{loader&&<Loader/>}
+					<button  disabled={loader} onClick={(e)=>onSubmit(e)} className='text-sm md:text-base items-center justify-center text-white rounded-md bg-orange-600 px-[5px] md:px-7 py-[2px]
+								hover:shadow-xl hover:bg-orange-300 hover:shadow-orange-100'>Создать страничку товара</button>
+				</div>
+			</form>
+		</div>
 	);
 };
 

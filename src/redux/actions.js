@@ -1,4 +1,4 @@
-import {ADD_ITEM, ADD_TO_CART, INIT, REMOVE_USER, SET_USER} from './types'
+import {ADD_ITEM, ADD_TO_CART, CLOSE_MENU, INIT, OPEN_MENU, REMOVE_USER, SET_USER} from './types'
 import { IProduct } from './../models';
 import { query, collection } from 'firebase/firestore';
 import { db } from './firebase';
@@ -30,6 +30,17 @@ export function removeUser(payload){
 	return {
 		type:REMOVE_USER,
 		payload
+	}
+}
+
+export function openMenu(){
+	return{
+		type:OPEN_MENU
+	}
+}
+export function closeMenu(){
+	return{
+		type:CLOSE_MENU
 	}
 }
 

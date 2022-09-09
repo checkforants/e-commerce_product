@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Navigate, Route, Routes, useNavigate } from 'react-router-dom';
 
-import Navigator from './components/Navigator';
+import Navigator from './components/Navigator/Navigator';
 import Modal from './components/Modal';
 import PhotoGallery from './components/PhotoGallery';
 import About from './pages/About';
@@ -33,7 +33,7 @@ function App(props) {
 	const dispatch = useDispatch()
 	const navigate = useNavigate()
 
-
+	console.log(props.burger);
 	const auth = getAuth() 
 	const [user, loading, error] = useAuthState(auth);
 
@@ -67,9 +67,10 @@ function App(props) {
 	}, [user]);
 
   return (
-	<div className='app w-4/5 h-screen mx-auto box-border relative '>
+	<div className='app w-4/5 h-full mx-auto box-border relative '>
 		<Navigator/>
-		<div className='w-10/12 box-border mx-auto h-screen py-10 flex flex-col justify-center items-center'>
+		
+		<div className='relative  w-11/12 md:w-10/12 box-border mx-auto h-screen pt-[70px] md:pt-[90px] md:py-10 md:flex md:flex-col justify-center items-center'>
 		{props.user.email?
 			<Routes >
 				<Route path='/' element={<CollectionsPage/>}></Route>
@@ -98,7 +99,8 @@ function App(props) {
 function mapStateToProps(state) {
 	// console.log(state.theme.isDarkTheme);
 	return {
-		user: state.user
+		user: state.user,
+		burger:state.modal.burger
 	};
   }
 export default connect(mapStateToProps)(App);

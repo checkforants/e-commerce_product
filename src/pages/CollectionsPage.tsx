@@ -22,15 +22,17 @@ const CollectionsPage = (props:any) => {
 
 	
 	if (location.pathname=='/men'){
-		res = res.filter((item:any)=>item.sex!=='women')
+		res = res.filter((item:any)=>item.sex!=='female')
 
 	}
 	if (location.pathname=='/women'){
-		res = res.filter((item:any)=>item.sex!=='men')
+		res = res.filter((item:any)=>item.sex!=='male')
 
 	}
+	console.log(res);
+	
 	return (
-		<div className='h-full pt-[65px] flex flex-col'>
+		<div className='h-full flex flex-col'>
 			{res?res.map((item:any, ind:number)=><Item key={ind} info={item}></Item>):<Loader></Loader>}
 		</div>
 	);

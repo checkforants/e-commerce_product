@@ -1,5 +1,5 @@
 import { combineReducers } from "@reduxjs/toolkit";
-import { ADD_ITEM, ADD_TO_CART, INIT, REMOVE_USER, SET_USER } from './types';
+import { ADD_ITEM, ADD_TO_CART, INIT, OPEN_MENU, REMOVE_USER, SET_USER, CLOSE_MENU } from './types';
 import 'firebase/firestore'
 import {
 	ReactReduxFirebaseProvider,
@@ -88,11 +88,27 @@ export function userReducer(state = initialUsState, action) {
 			return state;
 	}
 }
+const modalInitialState = {
+	burger:false,
+}
+export function modalReducer(state = modalInitialState, action) {
+	switch (action.type) {
+		case OPEN_MENU:
+			return {...state, burger:true}
+		;
+		case CLOSE_MENU:
+			return {...state, burger:false}
+		;
+		default:
+			return state
+	} 
+}
 
 export const rootReducer = combineReducers({
 	items: itemsReducer, 
 	currentUser:currentUserReducer,
 	firestore: firestoreReducer,
 	firebase: firebaseReducer,
-	user: userReducer
+	user: userReducer,
+	modal:modalReducer,
 })

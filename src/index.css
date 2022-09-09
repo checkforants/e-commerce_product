@@ -102,6 +102,17 @@ input,textarea, select, option{
 	width: 100%;
 	box-shadow: 2px 2px 3px 1px rgba(0, 0, 0, 0.2);
 }
+@media(max-width:768px){
+	input,textarea, select, option{
+		background-color: rgb(229 231 235);
+		color: black;
+		border-radius: 15px;
+		resize:none;
+		padding: 2px 10px;
+		width: 100%;
+		box-shadow: 2px 2px 3px 1px rgba(0, 0, 0, 0.2);
+	}
+}
 
 input::-webkit-input-placeholder{
 	color: rgba(0, 0, 0, 0.625);
@@ -111,7 +122,7 @@ textarea{
 }
 textarea::-webkit-input-placeholder{
 	color: rgba(0, 0, 0, 0.625);
-
+	height: 50px;
 }
 
 
@@ -126,21 +137,6 @@ textarea::-webkit-input-placeholder{
 	border-radius: 10px;
 }
 
-@media (max-width:800px) {
-	.app{
-		width: 100%;
-		margin: 0;
-		padding: 0px;
-
-	}
-	.navigator{
-		width: 100%;
-		padding: 10px 20px;
-	}
-	.titles{
-		display: none;
-	}
-}
 .sneakers{
 	font-family: 'Cambay', sans-serif;
 	letter-spacing: 0px;
@@ -182,3 +178,36 @@ body::-webkit-scrollbar {
 	background: -webkit-gradient(linear, left top, left bottom, from(#d396f7), to(#a000ea));
 	background: linear-gradient(180deg, rgb(255, 166, 0), #ea580c);
   }
+
+
+
+
+  @media(max-width:1024px){
+	.app{
+		width: 100%;
+	}
+	.navigator{
+		width: 100%;
+		padding: auto 20px ;
+	}
+
+
+}
+@media (max-width:768px) {
+	.app{
+		width: 100%;
+		margin: 0;
+		padding: 0px;
+
+	}
+	.navigator{
+		width: 100%;
+		padding: 10px 20px;
+	}
+	.titles{
+		display: none;
+	}
+	.item{
+		
+	}
+}

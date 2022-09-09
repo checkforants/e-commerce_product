@@ -1,5 +1,8 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { addToCart } from '../redux/actions';
+import CartItem from './CartItem';
 
 interface ICartProps{
 	pid:number,
@@ -7,24 +10,35 @@ interface ICartProps{
 }
 // 
 const Cart = (props:any) => {
-
+	const dispatch = useDispatch
+	console.log(props.user.email);
 	
 	return (
-		<div className='w-[300px] top-10 h-[200px] bg-white absolute z-3 right-0 rounded-md  flex flex-col pt-5 shadow-[0_0px_60px_-5px_rgba(0,0,0,0.3)]
-		'>
-			<div className='px-5 w-full border-b-2 border-grey-100 basis-1/4'>Cart</div>
-			<div className='scrollElem basis-3/4 flex flex-col overflow-y-scroll p-3
-			'>{
-			props.cart.length!==0
-				?props.cart.map((item:ICartProps)=><div key={item.pid} className='w-full h-full'>{item.pid}{item.amount}</div>)
-				:<div className='w-full h-full'>Your Card</div>}</div>
-		</div>
+		
+			<div className='w-[330px] top-10 h-[250px] right-[-60px] bg-white absolute z-3 rounded-md  flex flex-col  shadow-[0_0px_60px_-5px_rgba(0,0,0,0.3)]'>
+				<div className='block px-5 w-full border-b-2 py-5 border-grey-100 basis-3/12'>Cart</div>
+				{props.user.email
+					?<div className=' basis-3/4 flex flex-col  px-5 py-3'>
+						{props.cart.length!==0
+							?<div className='scrollElem overflow-y-scroll flex h-[110px] flex-col mb-3'>{props.cart.map((item:ICartProps)=><CartItem key={item.pid} className='w-full basis-1/12' pid={item.pid} amount={item.amount}/>)}</div>
+							:<div className='w-full basis-6/12'>Your Card</div>}
+						<button className='flex basis-2/12   md:h-auto items-center justify-center text-white rounded-md bg-orange-600
+								px-auto py-[7px] hover:shadow-xl hover:bg-orange-300 hover:shadow-orange-100'>
+								Checkout  	
+
+						</button>	
+					</div>
+					:<Link className='self-center' to={'/login'}>Вам нужно залогиниться</Link>
+				}
+			</div>
+		
 	);
 };
 function mapStateToProps(state:any) {
 	return {
-		cart:  state.currentUser.cart,
+		cart: state.currentUser.cart,
 		items: state.items,
+		user:state.user
 		
 	};
   }
