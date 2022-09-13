@@ -12,6 +12,7 @@ interface ICartProps{
 const Cart = (props:any) => {
 	const dispatch = useDispatch
 	console.log(props.user.email);
+	console.log(props?.cart);
 	
 	return (
 		
@@ -19,8 +20,8 @@ const Cart = (props:any) => {
 				<div className='block px-5 w-full border-b-2 py-5 border-grey-100 basis-3/12'>Cart</div>
 				{props.user.email
 					?<div className=' basis-3/4 flex flex-col  px-5 py-3'>
-						{props.cart.length!==0
-							?<div className='scrollElem overflow-y-scroll flex h-[110px] flex-col mb-3'>{props.cart.map((item:ICartProps)=><CartItem key={item.pid} className='w-full basis-1/12' pid={item.pid} amount={item.amount}/>)}</div>
+						{props.cart && props.cart.length!==0
+							?<div className='scrollElem overflow-y-auto overflow-x-hidden flex h-[110px] flex-col mb-3'>{props.cart?.map((item:ICartProps)=><CartItem key={item.pid} className='w-full basis-1/12' pid={item.pid} amount={item.amount}/>)}</div>
 							:<div className='w-full basis-6/12'>Your Card</div>}
 						<button className='flex basis-2/12   md:h-auto items-center justify-center text-white rounded-md bg-orange-600
 								px-auto py-[7px] hover:shadow-xl hover:bg-orange-300 hover:shadow-orange-100'>
@@ -36,7 +37,7 @@ const Cart = (props:any) => {
 };
 function mapStateToProps(state:any) {
 	return {
-		cart: state.currentUser.cart,
+		cart: state.user.cart,
 		items: state.items,
 		user:state.user
 		

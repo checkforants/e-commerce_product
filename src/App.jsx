@@ -24,16 +24,18 @@ import { signInWithEmailAndPassword } from 'firebase/auth';
 
 
 import { useAuthState } from 'react-firebase-hooks/auth';
+import { where } from 'firebase/firestore';
 
 function App(props) {
 	//  const [items, itemsLoading, itemsSnap, itemsError] = useCollectionData(
 	// 	collection(db, 'items')
 	// )
 	// console.log(items);
+	
 	const dispatch = useDispatch()
 	const navigate = useNavigate()
 
-	console.log(props.burger);
+
 	const auth = getAuth() 
 	const [user, loading, error] = useAuthState(auth);
 
@@ -46,31 +48,45 @@ function App(props) {
 			// console.log(doc.data());
 			dispatch(addItem(doc.data()))
 		  });
-
+		  
+	}
+	const getUserDetails=async(us)=>{
+		const q = query(collection(db, 'users'), where("uid", "==", us.uid))
+		const querySnapshot = await getDocs(q);
+		querySnapshot.forEach((doc) => {
+			dispatch(setUser({
+				email:us.email,
+				id:us.uid,
+				token:us.accessToken,
+				cart:doc.data().cart,
+				wishList:doc.data().wishList,
+				image:us.photoURL
+			}))
+		  });
 	}
 	useEffect(()=>{
 		getItems()
+		
 	},[])
 	
 	
 	
 	useEffect(() => {
-		console.log(auth.currentUser);
 		if (user){
-			dispatch(setUser({
-				email:user.email,
-				id:user.uid,
-				token:user.accessToken,
-			}))
-			navigate('/')
+			const q = query(collection(db, 'items'))
+			getUserDetails(user)
+			
+			// navigate('/')
+			console.log(user);
 		}
+
 	}, [user]);
 
   return (
 	<div className='app w-4/5 h-full mx-auto box-border relative '>
 		<Navigator/>
 		
-		<div className='relative  w-11/12 md:w-10/12 box-border mx-auto h-screen pt-[70px] md:pt-[90px] md:py-10 md:flex md:flex-col justify-center items-center'>
+		<div className='relative w-11/12 md:w-10/12  box-border mx-auto h-screen pt-[70px] md:pt-[90px] md:py-10 md:flex md:flex-col justify-center items-center'>
 		{props.user.email?
 			<Routes >
 				<Route path='/' element={<CollectionsPage/>}></Route>

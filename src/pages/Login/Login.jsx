@@ -2,7 +2,7 @@ import React, {useContext, useState} from 'react';
 // import { AuthContext } from '../context';
 import cl from './Login.module.scss'
 import firebase from 'firebase/compat/app';
-import { doc, deleteDoc, setDoc, getDoc } from "firebase/firestore";
+import { doc, deleteDoc, setDoc, getDoc, query, collection, where, getDocs } from "firebase/firestore";
 import { Link, useNavigate } from 'react-router-dom';
 import { getAuth, onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
 import MyInput from './../../components/UI/MyInput/MyInput';
@@ -11,6 +11,7 @@ import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import { Alert } from '@mui/material';
 // import { setUser } from '../../redux/slices/userSlice';
 import { setUser } from './../../redux/actions';
+import { db } from '../../redux/firebase';
 
 
 	
@@ -23,17 +24,26 @@ const Login = (props) => {
 	const dispatch = useDispatch()
 	const navigate = useNavigate()
 	const lang = 'eng'
+
 	const handleLogin=(email, password)=>{
 		const auth = getAuth() 
 		console.log(auth);
 		signInWithEmailAndPassword(auth, email, password)
-			.then(({user})=>{
-				console.log(user.email, user.uid,  user.accessToken);
-				dispatch(setUser({
-					email:user.email,
-					id:user.uid,
-					token:user.accessToken,
-				}))
+			.then(async ({user})=>{
+				console.log(user.uid);
+				const q = query(collection(db, 'users'), where("uid", "==", user.uid))
+				const querySnapshot = await getDocs(q);
+				querySnapshot.forEach((doc) => {
+					console.log(doc.data());
+					dispatch(setUser({
+						email:user.email,
+						id:user.uid,
+						token:user.accessToken,
+						cart:doc.data().cart,
+						wishList:doc.data().wishList,
+						image:user.photoURL
+					}))
+				})
 				navigate('/')
 			})
 			.catch(e=>alert(e.message))

@@ -15,11 +15,17 @@ import Loader from './../components/UI/loader/Loader';
 
 
 const CollectionsPage = (props:any) => {
-	
+	const [scrollPos, setScrollPos] = useState(0)
 	let location = useLocation();
 
 	let res = props.items
-
+	// useEffect(()=>{
+	// 	window.scrollTo(0,scrollPos)
+	// 	return ()=>{
+	// 		setScrollPos(window.scrollY)
+	// 		console.log(window.scrollY);
+	// 	}
+	// })
 	
 	if (location.pathname=='/men'){
 		res = res.filter((item:any)=>item.sex!=='female')

@@ -1,4 +1,4 @@
-import {ADD_ITEM, ADD_TO_CART, CLOSE_MENU, INIT, OPEN_MENU, REMOVE_USER, SET_USER} from './types'
+import {ADD_ITEM, ADD_ITEM_TO_CART, ADD_TO_CART, CLOSE_MENU, INIT, OPEN_MENU, REMOVE_ITEM_FROM_CART, REMOVE_USER, SET_USER} from './types'
 import { IProduct } from './../models';
 import { query, collection } from 'firebase/firestore';
 import { db } from './firebase';
@@ -44,6 +44,20 @@ export function closeMenu(){
 	}
 }
 
+
+export function addItemToCart(payload) {
+	return{
+		type:ADD_ITEM_TO_CART,
+		payload
+	}
+}
+
+export function removeItemFromCart(payload) {
+	return{
+		type:REMOVE_ITEM_FROM_CART,
+		payload
+	}
+}
 // export function init() {
 // 	return function (dispatch){
 // 		let ans = []

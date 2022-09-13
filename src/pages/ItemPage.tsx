@@ -1,11 +1,15 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Thumbnail from '../components/Thumbnail';
 import Modal from '../components/Modal';
 import PhotoGallery from '../components/PhotoGallery';
-import { useParams } from 'react-router-dom';
+import { useParams, Navigate, useNavigate } from 'react-router-dom';
 import { connect, useDispatch } from 'react-redux';
 import { addToCart } from '../redux/actions';
 import Loader from './../components/UI/loader/Loader';
+import { addItemToCart } from './../redux/actions';
+import { setDoc, doc, updateDoc, arrayUnion } from 'firebase/firestore';
+import { db } from '../redux/firebase';
+
 
 
 const ItemPage = (props:any) => {
@@ -14,14 +18,11 @@ const ItemPage = (props:any) => {
 	const [modal, setModal] = useState(false)
 	const [amount, setAmount] = useState(0)
 	const {pid} = useParams()
-
+	const navigate= useNavigate()
 	const dispatch = useDispatch()
 	let data=[]
 
 	
-	const addToCartHandler = ()=>{
-		
-	}
 
 	if (pid){
 
@@ -30,8 +31,50 @@ const ItemPage = (props:any) => {
 	}
 	const arr =	data?.photos
 	
-	// const arr = 
 
+	async function AddingItemToCart(pid:any,amount:number){
+		if (!props.user.cart){
+			let question = window.confirm('Перейти на страницу log in?')
+			if (question){
+				navigate('/login')
+			}
+		}
+		if (props.user.cart && props.user.cart.filter((it:any)=>it.pid==pid).length==0){
+		
+			const res = {pid, amount}
+			const ref = doc(db, 'users', props.user.id);
+			console.log(res, props.user.id);
+			
+			await updateDoc(ref, {
+				cart: arrayUnion(res)
+			});
+			dispatch(addItemToCart( res ))
+		}
+		if (props.user.cart && props.user.cart.filter((it:any)=>it.pid==pid).length!=0){
+			let question = window.confirm('Товар уже в корзине. Хотите изменить количество товара в корзине?')
+			if (question){
+				const res = props.user.cart
+				const ref = doc(db, 'users', props.user.id);
+				res.forEach((el:any) => {
+					if(el.pid==pid){
+						el.amount = amount
+					}
+				console.log(res);
+				
+				});
+				await updateDoc(ref, {
+					cart: res
+				});
+				// navigate('/login')
+			}
+		}
+	}
+	// const arr = 
+	useEffect(()=>{
+		// const element = document.body
+		window.scrollTo(0,0)
+		
+	},[])
 	
 	return (
 			<div className='py-5'>
@@ -108,7 +151,7 @@ const ItemPage = (props:any) => {
 								<img className='md:hidden w-[45px] basis-1/12 md:basis-0 rounded-md bg-orange-600 cursor-pointer
 										hover:shadow-xl hover:bg-orange-300 hover:shadow-orange-100 p-3' src={require('../images/wishHeart.png')} alt="heart" />
 							</div>
-							<button onClick={()=>{dispatch(addToCart( {pid,amount} ))}}
+							<button onClick={()=>{AddingItemToCart(pid, amount)}}
 									className='flex basis-1/2 md:basis-6/12 space-x-3 h-[65px] md:h-auto items-center justify-center text-white rounded-md bg-orange-600
 									px-7 py-[6px] hover:shadow-xl hover:bg-orange-300 hover:shadow-orange-100'>
 
@@ -129,7 +172,7 @@ function mapStateToProps(state:any) {
 
 	return {
 		items: state.items,
-		currentUser: state.currentUser,
+		user: state.user,
 	};
   }
 export default connect(mapStateToProps)(ItemPage);

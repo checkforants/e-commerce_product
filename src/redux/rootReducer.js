@@ -1,5 +1,5 @@
 import { combineReducers } from "@reduxjs/toolkit";
-import { ADD_ITEM, ADD_TO_CART, INIT, OPEN_MENU, REMOVE_USER, SET_USER, CLOSE_MENU } from './types';
+import { ADD_ITEM, ADD_TO_CART, INIT, OPEN_MENU, REMOVE_USER, SET_USER, CLOSE_MENU, ADD_ITEM_TO_CART, REMOVE_ITEM_FROM_CART } from './types';
 import 'firebase/firestore'
 import {
 	ReactReduxFirebaseProvider,
@@ -40,32 +40,14 @@ function itemsReducer(state = initialItemsState, action){
 	}
 }
 
-const initialUserState = {
-	uid:123123123,
-	email:'qweqwe12@qwe.qwe',
-	cart:[
-		{pid: 0,amount:1}
-	],
-	image:'https://firebasestorage.googleapis.com/v0/b/sneakers-36077.appspot.com/o/defaultAva.png?alt=media&token=f2186fcb-adc6-416a-9def-3791d94764ae'
-}
 
-function currentUserReducer(state = initialUserState, action) {
-	switch (action.type) {
-		case ADD_TO_CART:
-			
-			return {...state, cart:[ ...state.cart,
-									{pid:action.payload.pid,
-									amount:action.payload.amount}
-								]}
-	
-		default:
-			return state;
-	}
-}
 const initialUsState= {
 	email:null,
 	token:null,
 	id:null,
+	cart:null,
+	wishList:null,
+	image:null
 };
 
 
@@ -73,17 +55,29 @@ const initialUsState= {
 export function userReducer(state = initialUsState, action) {
 	switch (action.type) {
 		case SET_USER:
-			
 			return {...state, email:action.payload.email,
 				token : action.payload.token,
-				id : action.payload.id
+				id : action.payload.id,
+				cart:action.payload.cart,
+				wishList:action.payload.wishList,
+				image:action.payload.image
 			}
 		case REMOVE_USER:
 			return{
-				email :null,
-				token: null,
-				id : null,
+				email:null,
+				token:null,
+				id:null,
+				cart:null,
+				wishList:null,
+				image:null
 			}
+		case ADD_ITEM_TO_CART:
+			return {...state, cart:[...state.cart, {pid:action.payload.pid, amount:action.payload.amount}]}
+		case REMOVE_ITEM_FROM_CART:
+			// console.log(action.payload.pid);
+			// console.log({...state, cart:[...state.cart.filter(elem=>elem.pid!==action.payload.pid)]});
+			return {...state, cart:[...state.cart.filter(elem=>elem.pid!==action.payload.pid)]}
+		
 		default:
 			return state;
 	}
@@ -103,10 +97,8 @@ export function modalReducer(state = modalInitialState, action) {
 			return state
 	} 
 }
-
 export const rootReducer = combineReducers({
 	items: itemsReducer, 
-	currentUser:currentUserReducer,
 	firestore: firestoreReducer,
 	firebase: firebaseReducer,
 	user: userReducer,

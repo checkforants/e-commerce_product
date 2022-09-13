@@ -47,19 +47,18 @@ const Navigator = (props:any) => {
 					</div>
 			
 					{props.user.email
-			
-					?<div className='relative pl-2 lg:pl-4' onMouseEnter={()=>setUserModal(true)} onMouseLeave={()=>setUserModal(false)}>
-						<img  id={'myimg'} className='w-[45px] h-[45px] relative bottom-[14px] avatar' src={props.image} alt="ava" />
-						{userModal?<UserModal/>:''}
-					</div>
-					:<Link onMouseEnter={()=>setUserModal(false)} className='pl-5' to='/login'>
-						<img  className='w-[25px] h-[25px] relative bottom-[4px] ' src='https://firebasestorage.googleapis.com/v0/b/sneakers-36077.appspot.com/o/signIn.png?alt=media&token=0119d870-fe68-43d4-aa60-70d0b900df81' alt="sign in">
-							</img>
-					</Link>}
-			
+						?<div className='relative pl-2 lg:pl-4' onMouseEnter={()=>setUserModal(true)} onMouseLeave={()=>setUserModal(false)}>
+							<img  id={'myimg'} className='w-[45px] h-[45px] relative bottom-[14px] avatar' src={props.image} alt="ava" />
+							{userModal?<UserModal/>:''}
+						</div>
+						:<Link onMouseEnter={()=>setUserModal(false)} className='pl-5' to='/login'>
+							<img  className='w-[25px] h-[25px] relative bottom-[4px] ' src='https://firebasestorage.googleapis.com/v0/b/sneakers-36077.appspot.com/o/signIn.png?alt=media&token=0119d870-fe68-43d4-aa60-70d0b900df81' alt="sign in">
+								</img>
+						</Link>
+					}
 				</div>
 			</div>
-
+			{/*MENU-BURGER SETTING  */}
 			{menuModal
 			?<div className={cl.modalN}>
 				<div onClick={()=>{setMenuModal(false); }} className='h-full fixed w-full pt-[70px] z-20 bg-neutral-600 opacity-30'>
@@ -72,7 +71,7 @@ const Navigator = (props:any) => {
 					{props.user.email?<Link onClick={()=>setClickedPage('createItem')} className={clickedPage=='createItem'?'pb-3 mb-4 active menu_item  box-border ':'pb-3 mb-4 menu_item  box-border'}to="/newItem">CreateItem</Link>:''}
 				</div>
 			</div>
-			:''}
+			:''} 
 			<input  checked={menuModal} onChange={(e)=>setMenuModal(e.target.checked)} className={`w-[30px] fixed  z-40 md:hidden ${cl.checkbox}`} type="checkbox" name="" id="chb" />
 					<div className={cl.hamburgerLines}>
 						<span className={`${cl.line} ${cl.line1}`}></span>
@@ -86,7 +85,7 @@ const Navigator = (props:any) => {
 function mapStateToProps(state:any) {
 
 	return {
-		image: state.currentUser.image,
+
 		user: state.user,
 		burger:state.modal.burger
 	};
