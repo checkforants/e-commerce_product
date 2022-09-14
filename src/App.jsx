@@ -25,6 +25,7 @@ import { signInWithEmailAndPassword } from 'firebase/auth';
 
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { where } from 'firebase/firestore';
+import Settings from './pages/Settings';
 
 function App(props) {
 	//  const [items, itemsLoading, itemsSnap, itemsError] = useCollectionData(
@@ -95,6 +96,7 @@ function App(props) {
 				<Route path='/about' element={<About/>}></Route>
 				<Route path='/newItem' element={<CreateNewItem/>}></Route>
 				<Route path='/item/:pid' element={<ItemPage/>}></Route>
+				<Route path='/settings' element={<Settings></Settings>}></Route>
 				<Route  path='*' element={<Navigate replace to = '/'/>}/>
 			</Routes>
 			:<Routes >

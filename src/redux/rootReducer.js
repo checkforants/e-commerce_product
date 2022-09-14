@@ -99,8 +99,6 @@ export function modalReducer(state = modalInitialState, action) {
 }
 export const rootReducer = combineReducers({
 	items: itemsReducer, 
-	firestore: firestoreReducer,
-	firebase: firebaseReducer,
 	user: userReducer,
 	modal:modalReducer,
 })
