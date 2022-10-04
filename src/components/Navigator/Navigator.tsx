@@ -59,20 +59,19 @@ const Navigator = (props:any) => {
 				</div>
 			</div>
 			{/*MENU-BURGER SETTING  */}
-			{menuModal
-			?<div className={cl.modalN}>
-				<div onClick={()=>{setMenuModal(false); }} className='h-full fixed w-full pt-[70px] z-20 bg-neutral-600 opacity-30'>
+			<div className={menuModal?`block md:hidden`:'hidden'}>
+				<div onClick={()=>{setMenuModal(false); }} className='h-full fixed w-full pt-[70px] z-20 bg-neutral-600 opacity-30 md:hidden'>
 				</div>
-				<div className='p-[30px] pt-[90px] fixed h-full z-30 w-[250px] flex flex-col  text-xl bg-white opacity-1'>
-					<Link onClick={()=>setClickedPage('collections')} className={clickedPage=='collections'?'pb-3 mb-4 menu_item box-border ':'pb-3 mb-4 menu_item box-border'} to="/">Collections</Link>
-					<Link onClick={()=>setClickedPage('men')} className={clickedPage=='men'?'pb-3 mb-4 menu_item box-border ':'pb-3 mb-4 menu_item  box-border'} to="/men">Men</Link>
-					<Link onClick={()=>setClickedPage('women')} className={clickedPage=='women'?'pb-3 mb-4 menu_item box-border ':'pb-3 mb-4 menu_item box-border'} to="/women">Women</Link>
-					<Link onClick={()=>setClickedPage('about')} className={clickedPage=='about'?'pb-3 mb-4 menu_item  box-border ':'pb-3 mb-4 menu_item  box-border'} to="/about">About</Link>
+
+			</div>
+			<div className={`p-[30px] pt-[100px] fixed h-full z-30 w-[250px] flex flex-col  text-xl bg-white  ${menuModal?cl.animation:cl.animationOut} transition-opacity duration-1000 md:hidden`} >
+					<Link onClick={()=>{setClickedPage('collections');setMenuModal(false);}  } className={clickedPage=='collections'?'pb-3 mb-4 menu_item box-border ':'pb-3 mb-4 menu_item box-border'} to="/">Collections</Link>
+					<Link onClick={()=>{setClickedPage('men');setMenuModal(false);}} className={clickedPage=='men'?'pb-3 mb-4 menu_item box-border ':'pb-3 mb-4 menu_item  box-border'} to="/men">Men</Link>
+					<Link onClick={()=>{setClickedPage('women');setMenuModal(false);}} className={clickedPage=='women'?'pb-3 mb-4 menu_item box-border ':'pb-3 mb-4 menu_item box-border'} to="/women">Women</Link>
+					<Link onClick={()=>{setClickedPage('about');setMenuModal(false);}} className={clickedPage=='about'?'pb-3 mb-4 menu_item  box-border ':'pb-3 mb-4 menu_item  box-border'} to="/about">About</Link>
 					{props.user.email?<Link onClick={()=>setClickedPage('createItem')} className={clickedPage=='createItem'?'pb-3 mb-4 active menu_item  box-border ':'pb-3 mb-4 menu_item  box-border'}to="/newItem">CreateItem</Link>:''}
 				</div>
-			</div>
-			:''} 
-			<input  checked={menuModal} onChange={(e)=>setMenuModal(e.target.checked)} className={`w-[30px] fixed  z-40 md:hidden ${cl.checkbox}`} type="checkbox" name="" id="chb" />
+			<input  checked={menuModal} onChange={(e)=>setMenuModal(e.target.checked)} className={`w-[30px] fixed  z-40  ${cl.checkbox} md:hidden`} type="checkbox" name="" id="chb" />
 					<div className={cl.hamburgerLines}>
 						<span className={`${cl.line} ${cl.line1}`}></span>
 						<span className={`${cl.line} ${cl.line2}`}></span>

@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { addToCart } from '../redux/actions';
+
+
 import CartItem from './CartItem';
 
 interface ICartProps{

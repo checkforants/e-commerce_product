@@ -13,8 +13,12 @@ import {useCollectionData} from 'react-firebase-hooks/firestore'
 import 'firebase/firestore';
 import { db, app } from './redux/firebase';
 import { getFirestore, collection } from 'firebase/firestore';
-import { init, addItem, setUser } from './redux/actions';
-import { useDispatch, connect } from 'react-redux';
+import { init } from './redux/actions';
+import {addItem} from './redux/slices/itemsSlice'
+import {setUser} from './redux/slices/userSlice'
+
+
+import { useDispatch, connect, useSelector } from 'react-redux';
 import Login from './pages/Login/Login';
 import Signup from './pages/Signup/Signup';
 import { query } from 'firebase/firestore';
@@ -36,7 +40,7 @@ function App(props) {
 	const dispatch = useDispatch()
 	const navigate = useNavigate()
 
-
+	// const user = useSelector()
 	const auth = getAuth() 
 	const [user, loading, error] = useAuthState(auth);
 

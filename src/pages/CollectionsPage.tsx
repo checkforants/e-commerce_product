@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 // import itemsArr from '../items';
 import Item from './../components/Item';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { connect } from 'react-redux'
 import { getDocs } from 'firebase/firestore';
 import { db } from '../redux/firebase';
@@ -18,7 +18,8 @@ const CollectionsPage = (props:any) => {
 	const [scrollPos, setScrollPos] = useState(0)
 	let location = useLocation();
 
-	let res = props.items
+	let res = useSelector((state:any)=>state.items)
+	
 	// useEffect(()=>{
 	// 	window.scrollTo(0,scrollPos)
 	// 	return ()=>{
@@ -35,7 +36,7 @@ const CollectionsPage = (props:any) => {
 		res = res.filter((item:any)=>item.sex!=='male')
 
 	}
-	console.log(res);
+
 	
 	return (
 		<div className='h-full flex flex-col'>

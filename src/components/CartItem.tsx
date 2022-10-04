@@ -2,7 +2,7 @@ import { doc, updateDoc } from 'firebase/firestore';
 import React from 'react';
 import { connect, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { removeItemFromCart } from '../redux/actions';
+import  {removeItemFromCart} from '../redux/slices/userSlice';
 import { db } from '../redux/firebase';
 
 const CartItem = (props:any) => {
@@ -24,13 +24,13 @@ const CartItem = (props:any) => {
 
 	return (
 		<div className='flex'>
-			<Link to={`/item/${newArr[0].pid}`} className='w-[93%] mb-2 h-auto flex tracking-wide'>
+			<Link to={`/item/${newArr?.[0]?.pid}`} className='w-[93%] mb-2 h-auto flex tracking-wide'>
 
-				<img className='w-[23%] rounded mr-2' src={newArr[0].photos[0]} alt="pizda" />
+				<img className='w-[23%] rounded mr-2' src={newArr?.[0]?.photos?.[0]} alt="pizda" />
 				<div className='self-center w-[77%]'>
-					<div className='mb-1'>{newArr[0].name.length>20?newArr[0].name.slice(0,20)+'...':newArr[0].name}</div>
-					<span className='mr-2'>{'$'+newArr[0].price*(1-newArr[0].discount/100)+'x'+props.amount}</span>
-					<span className='font-bold text-lg'>${(newArr[0].price*(1-newArr[0].discount/100 )*props.amount).toFixed(2)}</span>
+					<div className='mb-1'>{newArr?.[0]?.name.length>20?newArr?.[0]?.name.slice(0,20)+'...':newArr?.[0]?.name}</div>
+					<span className='mr-2'>{'$'+newArr?.[0]?.price*(1-newArr?.[0]?.discount/100)+'x'+props.amount}</span>
+					<span className='font-bold text-lg'>${(newArr?.[0]?.price*(1-newArr?.[0]?.discount/100 )*props.amount).toFixed(2)}</span>
 				</div>
 			</Link>
 			<div  onClick={()=>removeItem()} className='self-center p-4' >

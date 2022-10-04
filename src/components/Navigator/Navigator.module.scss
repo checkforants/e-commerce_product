@@ -34,13 +34,11 @@
 //   position: relative;
 //   height: 60px;
 // }
-#chb{
 
-}
 .checkbox {
 
 
-  display: block;
+//   display: block;
   height: 32px;
   width: 32px;
   top: 20px;
@@ -115,6 +113,33 @@ input[type="checkbox"]:checked ~ .logo{
   display: none;
 }
 
-.modalN{
-	
+
+// .menuAnimation{
+
+// }
+
+.animation{
+	display: flex;
+	animation: animation 0.3s linear 1;
+}
+.animationOut{
+	left: -250px;
+	animation: animationOut 0.3s linear 1;
+}
+@keyframes animation{
+	0%{
+		left: -250px;
+	}
+	100%{
+		left:0px
+	}
+}
+@keyframes animationOut{
+	0%{
+		left: 0px;
+	}
+	100%{
+		
+		left:-250px
+	}
 }

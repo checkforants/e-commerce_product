@@ -15,13 +15,13 @@ interface IData{
 	}
 }
 const Item = ({info}:IData) => {
-	// console.log(info);
+	console.log(info.photos);
 
 	
 	return (
 			<Link to={`/item/${info.pid}`} className='flex flex-row justify-between border-b-2 py-2 basis-[30%] shrink-0 item'>
 				<div className='flex justify-center items-center basis-5/12 md:basis-[21%] '>
-					<img src={info.photos.sort()?.[0]} alt="" className='object-contain rounded-md'/> 
+					<img src={info.photos?.[0]} alt="" className='object-contain rounded-md'/> 
 				</div>
 				<div className='flex flex-col justify-around basis-6/12 md:basis-6/12'>
 					<div className='text-xl font-bold'>{info.name}</div>

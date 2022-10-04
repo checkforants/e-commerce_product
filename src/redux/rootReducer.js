@@ -9,36 +9,39 @@ import { createFirestoreInstance, firestoreReducer } from 'redux-firestore'
 import { firestoreConnect } from 'react-redux-firebase'
 import { collection, query, where, getDocs } from "firebase/firestore"
 import { db } from "./firebase";
+
+import itemsReducer from './slices/itemsSlice'
 // import userReducer from './slices/userSlice'
+// import  userReducer  from './slices/userSlice';
 
-const initialItemsState=
-[
-	{
-		pid:0,
-		company: 'Sneaker Company',
-		collection:'Fall',
-		name:'Fall Limited Edition Sneakers',
-		description:'These low-profile sneakers are your perfect casual wear companion. Featuring a \
-durable rubber outer sole, they’ll withstand everything the weather can offer.',
-		price:250,
-		discount:50,
-		sex:'uni',
-		amount:100,
-		photos:['https://i.ibb.co/JsfxFfw/image-product-1.jpg', 'https://i.ibb.co/wwwkHFd/image-product-2.jpg',
-		'https://i.ibb.co/kyXmNqY/image-product-3.jpg','https://i.ibb.co/XFmZXTw/image-product-4.jpg']
-	},
-]
+// const initialItemsState=
+// [
+// 	{
+// 		pid:0,
+// 		company: 'Sneaker Company',
+// 		collection:'Fall',
+// 		name:'Fall Limited Edition Sneakers',
+// 		description:'These low-profile sneakers are your perfect casual wear companion. Featuring a \
+// durable rubber outer sole, they’ll withstand everything the weather can offer.',
+// 		price:250,
+// 		discount:50,
+// 		sex:'uni',
+// 		amount:100,
+// 		photos:['https://i.ibb.co/JsfxFfw/image-product-1.jpg', 'https://i.ibb.co/wwwkHFd/image-product-2.jpg',
+// 		'https://i.ibb.co/kyXmNqY/image-product-3.jpg','https://i.ibb.co/XFmZXTw/image-product-4.jpg']
+// 	},
+// ]
 
-function itemsReducer(state = initialItemsState, action){
-	switch (action.type) {
-		case ADD_ITEM:
-			return [...state, action.payload]
+// function itemsReducer(state = initialItemsState, action){
+// 	switch (action.type) {
+// 		case ADD_ITEM:
+// 			return [...state, action.payload]
 
 
-		default:
-			return state;
-	}
-}
+// 		default:
+// 			return state;
+// 	}
+// }
 
 
 const initialUsState= {

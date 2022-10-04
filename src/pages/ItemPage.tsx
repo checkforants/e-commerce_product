@@ -6,7 +6,7 @@ import { useParams, Navigate, useNavigate } from 'react-router-dom';
 import { connect, useDispatch } from 'react-redux';
 import { addToCart } from '../redux/actions';
 import Loader from './../components/UI/loader/Loader';
-import { addItemToCart } from './../redux/actions';
+import { addItemToCart } from './../redux/slices/userSlice';
 import { setDoc, doc, updateDoc, arrayUnion } from 'firebase/firestore';
 import { db } from '../redux/firebase';
 

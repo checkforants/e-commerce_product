@@ -60,7 +60,7 @@ const Settings = (props:any) => {
 		  // Upload completed successfully, now we can get the download URL
 		  getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
 			photoURL = downloadURL
-
+			
 			let user = auth.currentUser
 			updateUserProfile((user), {photoURL})
 			setLoader(false)
